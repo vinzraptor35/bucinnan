@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Special For You ❤</title>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+ <style>
+ body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: url('https://j.top4top.io/p_3819io9xr0.jpeg') no-repeat center center/cover; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+ 
+ /* Animasi Love-Love Bertebaran */
+ .heart-fly { position: absolute; bottom: -20px; color: #ff4757; font-size: 24px; pointer-events: none; animation: flyUp 4s linear infinite; opacity: 0.8; z-index: 1; }
+ @keyframes flyUp {
+ 0% { transform: translateY(0) scale(0.5); opacity: 0; }
+ 10% { opacity: 1; }
+ 90% { opacity: 1; }
+ 100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+ }
+
+ /* Container Pembungkus Alur Box */
+ .box-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; z-index: 5; position: relative; }
+
+ /* Desain Card Utama dengan Bercakan Pink Glow & Garis Putih Tipis */
+ .card { background: rgba(15, 15, 15, 0.75); backdrop-filter: blur(12px); border-radius: 20px; padding: 35px 25px; width: 85%; max-width: 380px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 25px rgba(255, 105, 180, 0.6), inset 0 0 15px rgba(255, 182, 193, 0.2); position: relative; box-sizing: border-box; }
+ 
+ /* Pojok Garis Ornamen Bingkai */
+ .card::before, .card::after { content: ''; position: absolute; width: 12px; height: 12px; border: 2px solid #ffb6c1; }
+ .card::before { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+ .card::after { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+
+ .foto-profil { width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+ h1 { font-size: 22px; margin-bottom: 12px; font-weight: 600; color: #fff; text-shadow: 0 0 5px rgba(255,105,180,0.5); }
+ p { font-size: 15px; line-height: 1.6; opacity: 0.95; min-height: 45px; margin-bottom: 15px; word-wrap: break-word; }
+ 
+ .wrapper-input { display: none; margin-top: 15px; animation: fadeIn 0.5s ease; }
+ textarea { width: 100%; height: 75px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: white; padding: 12px; font-family: 'Poppins', sans-serif; resize: none; outline: none; text-align: center; font-size: 14px; box-sizing: border-box; }
+ textarea::placeholder { color: rgba(255,255,255,0.6); }
+ 
+ /* Tombol Utama All Steps */
+ .btn-action { display: inline-block; background-color: #ff4757; color: white; padding: 12px 28px; font-weight: 600; text-decoration: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4); transition: 0.3s; margin-top: 15px; cursor: pointer; border: none; font-size: 15px; }
+ .btn-action:hover { transform: scale(1.05); background-color: #ff2a3a; box-shadow: 0 4px 20px rgba(255, 71, 87, 0.6); }
+ .btn-wa { background-color: #25d366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+ .btn-wa:hover { background-color: #20ba5a; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.6); }
+
+ /* Style Gambar Amplop Surat */
+ .img-surat { width: 140px; height: auto; margin: 10px auto 20px auto; display: block; animation: pulse 2s infinite; }
+ @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+ </style>
+</head>
+<body>
+ <audio id="suaraBucin" src="https://k.top4top.io/m_3819w9ra70.mpeg" preload="auto" loop></audio>
+ 
+ <div class="box-container">
+ <!-- STEP 1: TOMBOL BUKA AWAL -->
+ <div class="card" id="boxStep1">
+ <img class="img-surat" src="https://files.catbox.moe/k369re.png" alt="Surat">
+ <h1>Ada Pesan Spesial ✨</h1>
+ <p>Seseorang telah mengirimkan sebuah amplop rahasia penuh makna khusus buat kamu.</p>
+ <button onclick="actionStep1()" class="btn-action">Buka 📩</button>
+ </div>
+
+ <!-- STEP 2: TRANSISI BUKA SURAT -->
+ <div class="card" id="boxStep2" style="display: none;">
+ <img class="img-surat" src="https://files.catbox.moe/v64gco.png" alt="Surat Terbuka">
+ <h1>Ada surat buat Kamuul ✉</h1>
+ <p>Klik suratnya & baca sampai akhir yaa 🫣🤍</p>
+ <button onclick="actionStep2()" class="btn-action">Buka Surat 💌</button>
+ </div>
+
+ <!-- STEP 3: HALAMAN UTAMA KETIKAN TEKS & TOMBOL BALAS -->
+ <div class="card" id="boxStep3" style="display: none;">
+ <img class="foto-profil" src="https://f.top4top.io/p_3819b66b10.jpeg" alt="Profile">
+ <h1>For You: raniacantik ❤</h1>
+ <p><span id="ketikTeks"></span></p>
+ 
+ <div class="wrapper-input" id="areaBalas">
+ <textarea id="pesanUser" placeholder="Kirim kesan pesan lu ke Fengxiu..."></textarea>
+ <button onclick="kirimKeWA()" class="btn-action btn-wa">Balas 📩</button>
+ </div>
+ </div>
+ </div>
+
+ <script>
+ // Generator Efek Love Bertebaran secara Berkelanjutan ke Atas Layar
+ setInterval(() => {
+ const heart = document.createElement('div');
+ heart.className = 'heart-fly';
+ heart.innerHTML = '❤️';
+ heart.style.left = Math.random() * 100 + 'vw';
+ heart.style.animationDuration = (Math.random() * 2 + 3) + 's'; // Variasi kecepatan naik
+ document.body.appendChild(heart);
+ setTimeout(() => { heart.remove(); }, 4000);
+ }, 350);
+
+ function actionStep1() {
+ Swal.fire({
+ title: 'Hai Sayang raniacantik! 😙',
+ text: 'Aloo kamu yg lucu',
+ icon: 'info',
+ confirmButtonText: 'Lanjut 🌸',
+ confirmButtonColor: '#ff4757',
+ allowOutsideClick: false
+ }).then((result) => {
+ if (result.isConfirmed) {
+ document.getElementById('boxStep1').style.display = 'none';
+ document.getElementById('boxStep2').style.display = 'block';
+ }
+ });
+ }
+
+ function actionStep2() {
+ document.getElementById('boxStep2').style.display = 'none';
+ document.getElementById('boxStep3').style.display = 'block';
+ 
+ const audio = document.getElementById('suaraBucin');
+ audio.play().catch(e => console.log("Audio autoplay block:", e));
+ 
+ new Typed('#ketikTeks', {
+ strings: ['Kamu adalah penjaga hati yang tak pernah kusangka akan kutemukan. Di tengah dunia yang penuh dengan pilihan, hatiku hanya ingin berlabuh padamu. Terima kasih sudah menjadi tempat pulang yang paling aman, menjaga setiap rasa ini dengan tulus, dan membuatku yakin bahwa mencintaimu adalah keputusan terbaik yang pernah kubuat I love you more than words can say. You are my forever..... ❤️'],
+ typeSpeed: 50,
+ loop: false,
+ showCursor: true,
+ cursorChar: '|',
+ onComplete: () => {
+ document.getElementById('areaBalas').style.display = 'block';
+ }
+ });
+ }
+
+ function kirimKeWA() {
+ const isiPesan = document.getElementById('pesanUser').value.trim();
+ if (!isiPesan) {
+ alert('Tulis kesan & pesannya dulu dong King/Queen! 🥺');
+ return;
+ }
+ 
+ const formatSms = "Halo Raja FengXiu!\n\nMakasih banyak ya web HBD/BUCIN/MAAF/BIRAHI-nya.\nIni kesan & pesan dari gw:\n\n\"" + isiPesan + "\"";
+ const linkWa = "https://wa.me/6285242556628?text=" + encodeURIComponent(formatSms);
+ 
+ window.location.href = linkWa;
+ }
+ </script>
+</body>
+</html>
